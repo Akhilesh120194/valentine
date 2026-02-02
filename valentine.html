@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      width: 90%;
+      max-width: 360px;
+      position: relative;
+    }
+
+    h1 {
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      font-size: 18px;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 15px 10px;
+    }
+
+    .yes {
+      background: #e63946;
+      color: white;
+    }
+
+    .no {
+      background: #ccc;
+      position: absolute;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <h1>💖 My Love 💖</h1>
+  <p>Life with you is my favorite place to be.</p>
+  <h1>Will you be my Valentine? 🌹</h1>
+
+  <button class="yes" onclick="yesClick()">Yes 💕</button>
+  <button class="no" id="noBtn">No 🙈</button>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const hearts = document.getElementById("hearts");
+
+  noBtn.addEventListener("mouseover", moveNo);
+  noBtn.addEventListener("click", moveNo);
+
+  function moveNo() {
+    noBtn.style.left = Math.random() * 250 + "px";
+    noBtn.style.top = Math.random() * 250 + "px";
+  }
+
+  function yesClick() {
+    const card = document.getElementById("card");
+    hearts.style.display = "block";
+
+    card.innerHTML = `
+      <h1>😄 I knew it!</h1>
+      <p>
+        Before you say anything…<br>
+        I made something just for us ❤️
+      </p>
+
+      <video
+        src="our_story.mp4"
+        controls
+        autoplay
+        playsinline
+        style="
+          width:100%;
+          border-radius:20px;
+          margin:20px 0;
+          box-shadow:0 10px 25px rgba(0,0,0,0.25);
+        ">
+      </video>
+
+      <p style="font-size:20px; color:#e63946; font-weight:bold;">
+        Not just this Valentine ❤️<br>
+        I choose you. Today. Tomorrow. Forever 💍
+      </p>
+    `;
+
+    for (let i = 0; i < 35; i++) createHeart();
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    hearts.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }
+</script>
+
+</body>
+</html>
